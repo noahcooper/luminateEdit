@@ -6,7 +6,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.0 (29-NOV-2012)
+ * Version: 1.1 (17-DEC-2012)
  */
 
 /* namespace for the extension */
@@ -273,6 +273,13 @@ var luminateEdit = {
         return luminateEdit.servlets.Ecommerce.getUrl();
       }
     }, 
+    GigyaLogin: {
+      getUrl: function() {
+        var adminUrl = 'Social?social=open_auth_config';
+        
+        return adminUrl;
+      }
+    }, 
     LteUser: {
       getUrl: function() {
         var adminUrl = 'LteAdmin', 
@@ -373,11 +380,6 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
-    SPageNavigator: {
-      getUrl: function() {
-        return luminateEdit.servlets.PageNavigator.getUrl();
-      }
-    }, 
     PageServer: {
       getUrl: function() {
         var adminUrl = 'PageBuilderAdmin',
@@ -394,6 +396,33 @@ var luminateEdit = {
         adminUrl = adminUrl.replace('${pageName}', currentPageName);
         
         return adminUrl;
+      }
+    }, 
+    PhotoAlbumUser: {
+      getUrl: function() {
+        var adminUrl = 'PhotoAlbumAdmin', 
+        
+        currentView = luminateEdit.getQueryParam('view'), 
+        currentAlbumID = luminateEdit.getQueryParam('AlbumID'), 
+        currentPhotoID = luminateEdit.getQueryParam('PhotoID');
+        
+        switch( currentView) {
+          case 'UserAlbum':
+            adminUrl += '?view=AlbumCreateDetail&AlbumID=${albumId}';
+            break;
+          case 'UserPhotoDetail':
+            adminUrl += '?view=UpdatePhoto&PhotoID=${photoId}';
+            break;
+        }
+        
+        adminUrl = adminUrl.replace('${albumId}', currentAlbumID).replace('${photoId}', currentPhotoID);
+        
+        return adminUrl;
+      }
+    }, 
+    SPageNavigator: {
+      getUrl: function() {
+        return luminateEdit.servlets.PageNavigator.getUrl();
       }
     }, 
     SPageServer: {
@@ -471,6 +500,8 @@ var luminateEdit = {
           case 'teamlist':
             adminUrl += buildTeamraiserAdminUrl('fr_team_list');
             break;
+
+
           /* company list */
           case 'complist':
             adminUrl += buildTeamraiserAdminUrl('fr_company_list');
@@ -833,7 +864,6 @@ var luminateEdit = {
       }
     }
     
-    /* TODO Photo Albums */
     /* TODO Personal Events */
     /* TODO ServiceCenter/UserCenter */
     /* TODO Image Library */
