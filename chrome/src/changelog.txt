@@ -1,9 +1,0 @@
-1.1
-Fixed issue with PageBuilder default
-Added support for Donation Classic forms
-
-1.1.1
-Reorganized code to integrate with Firefox
-
-1.2
-Added support for GigyaLogin and PhotoAlbumUser
