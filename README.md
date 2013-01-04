@@ -9,6 +9,6 @@ new tab and take you directly to the administrative interface for the page you w
 
 The extension is available for the following browsers:
 
-[Chrome](https://github.com/noahcooper/luminateEdit/tree/master/chrome)
-[Firefox](https://github.com/noahcooper/luminateEdit/tree/master/firefox)
+[Chrome](https://github.com/noahcooper/luminateEdit/tree/master/chrome)  
+[Firefox](https://github.com/noahcooper/luminateEdit/tree/master/firefox)  
 [Safari](https://github.com/noahcooper/luminateEdit/tree/master/safari)
