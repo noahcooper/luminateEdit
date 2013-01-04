@@ -13,7 +13,7 @@ luminateEdit.firefox = {
     /* set the tabUrl and show the button */
     if(require('tabs').activeTab.url) {
       luminateEdit.tabUrl = require('tabs').activeTab.url;
-	}
+    }
     
     var currentServlet = luminateEdit.getCurrentServlet();
     if(currentServlet != null && luminateEdit.servlets[currentServlet] && luminateEdit.servlets[currentServlet].getUrl() != null) {
@@ -24,16 +24,16 @@ luminateEdit.firefox = {
         onClick: luminateEdit.firefox.goToEditUrl
       });
     }
-	else if(luminateEdit.firefox.editWidget != null) {
-	  luminateEdit.firefox.editWidget.destroy();
-	}
+    else if(luminateEdit.firefox.editWidget != null) {
+      luminateEdit.firefox.editWidget.destroy();
+    }
   }, 
   
   /* go to the admin URL when the edit icon is clicked */
   goToEditUrl: function() {
     var currentServlet = luminateEdit.getCurrentServlet();
     if(luminateEdit.tabUrl != null && currentServlet != null) {
-      require('tabs').open(luminateEdit.tabUrl.split('/site/')[0] + '/site/' + luminateEdit.servlets[currentServlet].getUrl())
+      require('tabs').open(luminateEdit.tabUrl.split('/site/')[0] + '/site/' + luminateEdit.servlets[currentServlet].getUrl());
     }
   }
 };
