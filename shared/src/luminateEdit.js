@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.2 (04-JAN-2013)
+ * Version: 1.3 (09-JAN-2013)
  */
 
 /* namespace for the extension */
@@ -27,7 +27,7 @@ var luminateEdit = {
       return null;
     }
     else {
-      var queryStrings = '&' + luminateEdit.tabUrl.split('?')[1];
+      var queryStrings = '&' + luminateEdit.tabUrl.split('?')[1].replace(/&amp;/g, '&');
       /* if the param is not found, return early */
       if(queryStrings.indexOf('&' + paramName + '=') == -1) {
         return null;
@@ -135,6 +135,20 @@ var luminateEdit = {
         }
         
         adminUrl = adminUrl.replace('${eventId}', currentEventId);
+        
+        return adminUrl;
+      }
+    }, 
+    ConsInterestsUser: {
+      getUrl: function() {
+        var adminUrl = 'CenterStandardPageAdmin';
+        
+        return adminUrl;
+      }
+    }, 
+    ConsProfileUser: {
+      getUrl: function() {
+        var adminUrl = 'CenterStandardPageAdmin';
         
         return adminUrl;
       }
@@ -266,6 +280,106 @@ var luminateEdit = {
     EcommerceCheckout: {
       getUrl: function() {
         return luminateEdit.servlets.Ecommerce.getUrl();
+      }
+    }, 
+    GetTogether: {
+      getUrl: function() {
+        var adminUrl = 'GetTogetherAdmin', 
+        
+        currentCalActivityId = luminateEdit.getQueryParam('cal_activity_id'), 
+        currentGettogether = luminateEdit.getQueryParam('gettogether'), 
+        currentCalEventId = luminateEdit.getQueryParam('cal_event_id');
+        
+        var buildAdminUrl = function(gettogetherAdmin, pageType) {
+          return '?gettogether.admin=' + gettogetherAdmin + '&page_type=' + pageType + 
+                 '&cal_activity_id=${calActivityId}&cal_campaign_id=';
+        };
+        
+        switch(currentGettogether) {
+          case 'activity_splash':
+            adminUrl += buildAdminUrl('edit_activity_splash.edit.activity', 'cp_activity_splash');
+            break;
+          case 'event_list':
+            adminUrl += buildAdminUrl('edit_event_list.edit.activity', 'cp_event_list');
+            break;
+          
+          /* TODO reg_host_confirm */
+          
+          case 'host_center':
+            adminUrl += buildAdminUrl('host_center_home.edit.hostcenter', 'cp_host_center');
+            break;
+          case 'edit_event_detail':
+            adminUrl += buildAdminUrl('host_center_event_detail.edit.hostcenter', 'cp_event_detail');
+            break;
+          case 'edit_event_detail.ep':
+            adminUrl += buildAdminUrl('host_center_event_detail.edit.hostcenter', 'cp_event_detail');
+            break;
+          case 'guest_detail':
+            adminUrl += buildAdminUrl('edit_guest_detail.edit.hostcenter', 'cp_guest_detail');
+            break;
+          
+          /* TODO host_event_page */
+          
+          case 'email_center':
+            adminUrl += buildAdminUrl('host_center_email_center.edit.hostcenter', 'cp_email_center_page');
+            break;
+          case 'email_center_message':
+            adminUrl += '?taf_id=&gettogether.admin=edit_activity_messages&cal_activity_id=${calActivityId}' + 
+                        '&action=messages_type&cal_campaign_id=&taf_list_key_editable=';
+            break;
+          case 'email_center_plaxo':
+            adminUrl += buildAdminUrl('host_center_plaxo.edit.hostcenter', 'cp_email_center_plaxo');
+            break;
+          case 'event_main':
+            adminUrl += '?gettogether.admin=cal_attendees_list&cal_event_id=${calEventId}' + 
+                        '&cal_activity_id=${calActivityId}&action=messages_type&cal_campaign_id=';
+            break;
+          case 'change_attendee_detail':
+            adminUrl += buildAdminUrl('edit_attendee_change_rsvp.edit.activity', 'cp_change_attendee');
+            break;
+          default:
+            if(currentCalActivityId != null) {
+              adminUrl += '?gettogether.admin=config_activity_pages.edit&cal_activity_id=${calActivityId}' + 
+                          '&action=config_activity_pages&cal_campaign_id=';
+            }
+        }
+        
+        adminUrl = adminUrl.replace('${calActivityId}', currentCalActivityId)
+                           .replace('${calEventId}', currentCalEventId);
+        
+        return adminUrl;
+      }
+    }, 
+    GetTogetherSec: {
+      getUrl: function() {
+        var adminUrl = 'GetTogetherAdmin', 
+        
+        currentCalActivityId = luminateEdit.getQueryParam('cal_activity_id'), 
+        currentGettogether = luminateEdit.getQueryParam('gettogether');
+        
+        var buildAdminUrl = function(gettogetherAdmin, pageType) {
+          return '?gettogether.admin=' + gettogetherAdmin + '&page_type=' + pageType + 
+                 '&cal_activity_id=${calActivityId}&cal_campaign_id=';
+        };
+        
+        switch(currentGettogether) {
+          case 'register_host_detail':
+            adminUrl += buildAdminUrl('cust_reg_host_detail.edit.host', 'cp_host_detail');
+            break;
+          case 'register_event_detail':
+            adminUrl += buildAdminUrl('cust_reg_host_event_detail.edit.host', 'cp_reg_event_detail');
+            break;
+          case 'register_host_waiver':
+            adminUrl += buildAdminUrl('cust_reg_host_waiver.edit.host', 'cp_host_waiver');
+            break;
+          case 'register_attendee_detail':
+            adminUrl += buildAdminUrl('edit_attendee_detail.edit.activity', 'cp_attendee_detail');
+            break;
+        }
+        
+        adminUrl = adminUrl.replace('${calActivityId}', currentCalActivityId);
+        
+        return adminUrl;
       }
     }, 
     GigyaLogin: {
@@ -401,7 +515,7 @@ var luminateEdit = {
         currentAlbumID = luminateEdit.getQueryParam('AlbumID'), 
         currentPhotoID = luminateEdit.getQueryParam('PhotoID');
         
-        switch( currentView) {
+        switch(currentView) {
           case 'UserAlbum':
             adminUrl += '?view=AlbumCreateDetail&AlbumID=${albumId}';
             break;
@@ -411,6 +525,35 @@ var luminateEdit = {
         }
         
         adminUrl = adminUrl.replace('${albumId}', currentAlbumID).replace('${photoId}', currentPhotoID);
+        
+        return adminUrl;
+      }
+    }, 
+    ServiceCenter: {
+      getUrl: function() {
+        var adminUrl = 'ServiceCenterAdmin', 
+        
+        currentPg = luminateEdit.getQueryParam('pg');
+        
+        switch(currentPg) {
+          case 'cancel':
+            adminUrl += '?svc.admin=svc_cancel_payment';
+            break;
+          case 'modifyamt':
+            adminUrl += '?svc.admin=svc_modify_amount';
+            break;
+          case 'skip':
+            adminUrl += '?svc.admin=svc_skip_payment';
+            break;
+          case 'changecc':
+            adminUrl += '?svc.admin=svc_sustainer_change_cc';
+            break;
+          case 'changeeft':
+            adminUrl += '?svc.admin=svc_sustainer_change_eft';
+            break;
+          
+          /* TODO modify gift date */
+        }
         
         return adminUrl;
       }
@@ -812,6 +955,11 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
+    UserCenter: {
+      getUrl: function() {
+        return luminateEdit.servlets.ServiceCenter.getUrl();
+      }
+    }, 
     VoteCenter: {
       getUrl: function() {
         var adminUrl = 'VoteCenterAdmin', 
@@ -857,8 +1005,8 @@ var luminateEdit = {
       }
     }
     
-    /* TODO Personal Events */
-    /* TODO ServiceCenter/UserCenter */
+    /* TODO Clubs */
+    /* TODO Directory */
     /* TODO Image Library */
   }
 };

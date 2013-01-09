@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor - Safari
  * luminateEdit-safari.js
- * Version: 1.0 (03-JAN-2013)
+ * Version: 1.1 (09-JAN-2013)
  */
 
 luminateEdit.safari = {
@@ -23,7 +23,7 @@ luminateEdit.safari = {
   
   /* go to the admin URL when the edit icon is clicked */
   goToEditUrl: function(event) {
-    if(event.command === 'editPageContent') {
+    if(event.command == 'editPageContent') {
       var currentServlet = luminateEdit.getCurrentServlet();
       if(luminateEdit.tabUrl != null && currentServlet != null) {
         event.target.browserWindow.openTab().url = luminateEdit.tabUrl.split('/site/')[0] + '/site/' + luminateEdit.servlets[currentServlet].getUrl();
