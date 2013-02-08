@@ -11,7 +11,7 @@ The extension is available for the following browsers:
 
 [Chrome](https://github.com/noahcooper/luminateEdit/tree/master/chrome)  
 [Firefox](https://github.com/noahcooper/luminateEdit/tree/master/firefox)  
-[Safari](https://github.com/noahcooper/luminateEdit/tree/master/safari)
+[Safari](https://github.com/noahcooper/luminateEdit/tree/master/safari)  
 [Opera](https://github.com/noahcooper/luminateEdit/tree/master/opera)
 
 Changelog
