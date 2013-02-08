@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="http://www.example.org/helloworld" version="1.5">
+	<name>Luminate Online Page Editor</name>
+	<description>Edit Luminate Online pages with just one click.</description>
+  	<author href="https://github.com/noahcooper/luminateEdit" email="noah.cooper@blackbaud.com">Noah Cooper</author>
+  	<icon src="icons/logo64.png"/>
+</widget>

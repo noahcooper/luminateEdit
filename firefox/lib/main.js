@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.3 (09-JAN-2013)
+ * Version: 1.5 (08-FEB-2013)
  */
 
 /* namespace for the extension */
@@ -27,7 +27,10 @@ var luminateEdit = {
       return null;
     }
     else {
-      var queryStrings = '&' + luminateEdit.tabUrl.split('?')[1].replace(/&amp;/g, '&');
+      /* get the list of query strings, accounting for escaped ampersands */
+      /* use a RegExp to ensure "&amp;" is not converted to "&" by UglifyJS */
+      var queryStrings = '&' + luminateEdit.tabUrl.split('?')[1].replace(new RegExp('&' + 'amp;', 'g'), '&');
+      
       /* if the param is not found, return early */
       if(queryStrings.indexOf('&' + paramName + '=') == -1) {
         return null;
@@ -139,6 +142,21 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
+    Clubs: {
+      getUrl: function() {
+        var adminUrl = 'ClubsAdmin', 
+        
+        currentClubId = luminateEdit.getQueryParam('club_id');
+        
+        if(currentClubId != null) {
+          adminUrl += '?edit=true&club_id=${clubId}&pg=aedit';
+        }
+        
+        adminUrl = adminUrl.replace('${clubId}', currentClubId);
+        
+        return adminUrl;
+      }
+    }, 
     ConsInterestsUser: {
       getUrl: function() {
         var adminUrl = 'CenterStandardPageAdmin';
@@ -153,9 +171,24 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
+    Dir: {
+      getUrl: function() {
+        var adminUrl = 'DirectoryAdmin', 
+
+        currentPg = luminateEdit.getQueryParam('pg');
+
+        switch(currentPg) {
+          case 'vprof':
+            adminUrl = 'ConsProfileAdmin?consID=' + luminateEdit.getQueryParam('mbr') + '&tabID=personal';
+            break;
+        }
+
+        return adminUrl;
+      }
+    }, 
     DocServer: {
       getUrl: function() {
-        var adminUrl = 'DocumentAdmin'; 
+        var adminUrl = 'DocumentAdmin';
         
         /* DocumentAdmin requires session info to be included in the URL to directly access a file */
         
@@ -591,6 +624,11 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
+    TeamRaiserUser: {
+      getUrl: function() {
+        /* TODO */
+      }
+    }, 
     Ticketing: {
       getUrl: function() {
         var adminUrl = 'OrgEventEdit', 
@@ -1004,9 +1042,7 @@ var luminateEdit = {
         return adminUrl;
       }
     }
-    
-    /* TODO Clubs */
-    /* TODO Directory */
+
     /* TODO Image Library */
   }
 };

@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor - Chrome
  * luminateEdit-chrome.js
- * Version: 1.0 (29-NOV-2012)
+ * Version: 1.1 (08-FEB-2013)
  */
 
 luminateEdit.chrome = {
@@ -9,7 +9,7 @@ luminateEdit.chrome = {
   checkForLuminateOnlineUrl: function(tabId, changeInfo, tab) {
     /* set the tabUrl and show the button as soon as the tab starts loading */
     if(changeInfo.status == 'loading') {
-      luminateEdit.tabUrl = tab.url;
+      luminateEdit.tabUrl = tab.url.replace('view-source:', '');
       
       var currentServlet = luminateEdit.getCurrentServlet();
       if(currentServlet != null && luminateEdit.servlets[currentServlet] && luminateEdit.servlets[currentServlet].getUrl() != null) {
