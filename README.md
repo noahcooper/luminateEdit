@@ -23,6 +23,7 @@ Changelog
 * Added support for editing Clubs and Directory pages.
 * Added the TeamRaiserUser servlet.
 * Fixed issue with getQueryParam method being broken when JavaScript was minified with UglifyJS.
+* Fixed an issue with Chrome URLs beginning with "view-source:".
 
 **Version: 1.4 (09-JAN-2013)**
 

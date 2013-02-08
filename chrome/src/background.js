@@ -1050,7 +1050,7 @@ var luminateEdit = {
 /*
  * Luminate Online Page Editor - Chrome
  * luminateEdit-chrome.js
- * Version: 1.1 (08-FEB-2013)
+ * Version: 1.2 (08-FEB-2013)
  */
 
 luminateEdit.chrome = {
@@ -1074,7 +1074,7 @@ luminateEdit.chrome = {
       active: true, 
       windowId: chrome.windows.WINDOW_ID_CURRENT
     }, function(allTabs) {
-      luminateEdit.tabUrl = allTabs[0].url;
+      luminateEdit.tabUrl = allTabs[0].url.replace('view-source:', '');
       
       var currentServlet = luminateEdit.getCurrentServlet();
       if(luminateEdit.tabUrl != null && currentServlet != null) {
