@@ -17,11 +17,16 @@ The extension is available for the following browsers:
 Changelog
 ---------
 
+**Version: 1.6 (19-FEB-2013)**
+
+* Added support for editing images in the Image Library.
+* Added support for editing API configuration when viewing an API response document.
+* Added support for editing AjaxProxy settings when viewing the AjaxProxy servlet.
+
 **Version: 1.5 (08-FEB-2013)**
 
 * Now available for Opera!
 * Added support for editing Clubs and Directory pages.
-* Added the TeamRaiserUser servlet.
 * Fixed issue with getQueryParam method being broken when JavaScript was minified with UglifyJS.
 * Fixed an issue with Chrome URLs beginning with "view-source:".
 

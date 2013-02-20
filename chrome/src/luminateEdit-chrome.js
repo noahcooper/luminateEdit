@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor - Chrome
  * luminateEdit-chrome.js
- * Version: 1.2 (08-FEB-2013)
+ * Version: 1.3 (19-FEB-2013)
  */
 
 luminateEdit.chrome = {
@@ -12,7 +12,8 @@ luminateEdit.chrome = {
       luminateEdit.tabUrl = tab.url.replace('view-source:', '');
       
       var currentServlet = luminateEdit.getCurrentServlet();
-      if(currentServlet != null && luminateEdit.servlets[currentServlet] && luminateEdit.servlets[currentServlet].getUrl() != null) {
+      if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
+         luminateEdit.servlets[currentServlet].getUrl() != null) {
         chrome.pageAction.show(tabId);
       }
     }
@@ -29,8 +30,14 @@ luminateEdit.chrome = {
       
       var currentServlet = luminateEdit.getCurrentServlet();
       if(luminateEdit.tabUrl != null && currentServlet != null) {
+        var adminBaseUrl = luminateEdit.tabUrl.split('/site/')[0];
+        /* if this is an Image Library image, split on the images directory */
+        if(luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') != -1) {
+          adminBaseUrl = luminateEdit.tabUrl.split('/images/')[0];
+        }
+        
         chrome.tabs.create({
-          url: luminateEdit.tabUrl.split('/site/')[0] + '/site/' + luminateEdit.servlets[currentServlet].getUrl()
+          url: adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl()
         });
       }
     });

@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor - Safari
  * luminateEdit-safari.js
- * Version: 1.1 (09-JAN-2013)
+ * Version: 1.2 (19-FEB-2013)
  */
 
 luminateEdit.safari = {
@@ -13,7 +13,8 @@ luminateEdit.safari = {
     }
     
     var currentServlet = luminateEdit.getCurrentServlet();
-    if(currentServlet != null && luminateEdit.servlets[currentServlet] && luminateEdit.servlets[currentServlet].getUrl() != null) {
+    if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
+       luminateEdit.servlets[currentServlet].getUrl() != null) {
       event.target.disabled = false;
     }
     else {
@@ -26,7 +27,13 @@ luminateEdit.safari = {
     if(event.command == 'editPageContent') {
       var currentServlet = luminateEdit.getCurrentServlet();
       if(luminateEdit.tabUrl != null && currentServlet != null) {
-        event.target.browserWindow.openTab().url = luminateEdit.tabUrl.split('/site/')[0] + '/site/' + luminateEdit.servlets[currentServlet].getUrl();
+        var adminBaseUrl = luminateEdit.tabUrl.split('/site/')[0];
+        /* if this is an Image Library image, split on the images directory */
+        if(luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') != -1) {
+          adminBaseUrl = luminateEdit.tabUrl.split('/images/')[0];
+        }
+        
+        event.target.browserWindow.openTab().url = adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl();
       }
     }
   }

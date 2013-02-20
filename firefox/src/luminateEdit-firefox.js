@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor - Firefox
  * luminateEdit-firefox.js
- * Version: 1.0 (29-NOV-2012)
+ * Version: 1.1 (19-FEB-2013)
  */
 
 luminateEdit.firefox = {
@@ -33,7 +33,13 @@ luminateEdit.firefox = {
   goToEditUrl: function() {
     var currentServlet = luminateEdit.getCurrentServlet();
     if(luminateEdit.tabUrl != null && currentServlet != null) {
-      require('tabs').open(luminateEdit.tabUrl.split('/site/')[0] + '/site/' + luminateEdit.servlets[currentServlet].getUrl());
+      var adminBaseUrl = luminateEdit.tabUrl.split('/site/')[0];
+      /* if this is an Image Library image, split on the images directory */
+      if(luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') != -1) {
+        adminBaseUrl = luminateEdit.tabUrl.split('/images/')[0];
+      }
+      
+      require('tabs').open(adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl());
     }
   }
 };

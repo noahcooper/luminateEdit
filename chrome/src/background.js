@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.5 (08-FEB-2013)
+ * Version: 1.6 (19-FEB-2013)
  */
 
 /* namespace for the extension */
@@ -11,12 +11,19 @@ var luminateEdit = {
   
   /* returns the servlet for the current page */
   getCurrentServlet: function() {
-    /* if tabUrl is null, or does not contain "/site/", return early */
-    if(luminateEdit.tabUrl == null || luminateEdit.tabUrl.indexOf('/site/') == -1) {
+    /* if tabUrl is null, or does not contain "/site/" or "/images/content/pagebuilder/", return early */
+    if(luminateEdit.tabUrl == null || luminateEdit.tabUrl.indexOf('/site/') == -1 && 
+       luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') == -1) {
       return null;
     }
     else {
-      return luminateEdit.tabUrl.split('/site/')[1].split('/')[0].split('?')[0];
+      /* if this is an Image Library image, use a fake servlet name */
+      if(luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') != -1) {
+        return 'ImageLibraryPseudoServlet';
+      }
+      else {
+        return luminateEdit.tabUrl.split('/site/')[1].split('/')[0].split('?')[0];
+      }
     }
   }, 
   
@@ -37,6 +44,17 @@ var luminateEdit = {
       }
       else {
         return queryStrings.split('&' + paramName + '=')[1].split('&')[0];
+      }
+    }
+  }, 
+  
+  /* common methods shared by multiple servlets */
+  common: {
+    api: {
+      getUrl: function() {
+        var adminUrl = 'SiteData?sdp=open_home';
+        
+        return adminUrl;
       }
     }
   }, 
@@ -118,6 +136,13 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
+    AjaxProxy: {
+      getUrl: function() {
+        var adminUrl = 'SiteData?sdp=open_ajax_proxy';
+        
+        return adminUrl;
+      }
+    }, 
     Calendar: {
       getUrl: function() {
         var adminUrl = 'OrgEventEdit', 
@@ -169,6 +194,66 @@ var luminateEdit = {
         var adminUrl = 'CenterStandardPageAdmin';
         
         return adminUrl;
+      }
+    }, 
+    CRAddressBookAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRAdvocacyAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRConnectAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRConsAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRContentAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRDataSyncAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRDonationAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRGroupAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CROrgEventAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRRecurringAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRSurveyAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    CRTeamraiserAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
       }
     }, 
     Dir: {
@@ -422,6 +507,26 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
+    ImageLibraryPseudoServlet: {
+      getUrl: function() {
+        var adminUrl = 'ImageLibrary', 
+        
+        currentImageFileName = luminateEdit.tabUrl.split('/pagebuilder/')[1].split('?')[0];
+        
+        adminUrl += '?cat.filter=-1&filter_text=${imageFileName}&filter_search=Search&page_number=' + 
+                    '&lcmd=filtering&lcmd_cf=&cmd=Hide&image_type=graphic&xcode=standalone&action=selectimage' + 
+                    '&page_id=&component_index=&org=';
+        
+        /* most admin-side servlets redirect appropriately if requested using the /site/ directory */
+        /* the ImageLibrary servlet, however, throws a security error */
+        /* there's no good way to know the secure URL from a non-secure page */
+        /* so, use CRTeamraiserAPI which is always secure as a passthrough */
+        adminUrl = 'CRTeamraiserAPI?method=&v=1.0&redirect=' + 
+                   encodeURIComponent('../admin/' + adminUrl.replace('${imageFileName}', currentImageFileName));
+        
+        return adminUrl;
+      }
+    }, 
     LteUser: {
       getUrl: function() {
         var adminUrl = 'LteAdmin', 
@@ -599,6 +704,56 @@ var luminateEdit = {
     SPageServer: {
       getUrl: function() {
         return luminateEdit.servlets.PageServer.getUrl();
+      }
+    }, 
+    SRAdvocacyAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRConsAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRContentAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRDataSyncAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRDonationAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRGroupAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SROrgEventAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRRecurringAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRSurveyAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
+      }
+    }, 
+    SRTeamraiserAPI: {
+      getUrl: function() {
+        return luminateEdit.common.api.getUrl();
       }
     }, 
     SSurvey: {
@@ -1042,15 +1197,13 @@ var luminateEdit = {
         return adminUrl;
       }
     }
-
-    /* TODO Image Library */
   }
 };
 
 /*
  * Luminate Online Page Editor - Chrome
  * luminateEdit-chrome.js
- * Version: 1.2 (08-FEB-2013)
+ * Version: 1.3 (19-FEB-2013)
  */
 
 luminateEdit.chrome = {
@@ -1061,7 +1214,8 @@ luminateEdit.chrome = {
       luminateEdit.tabUrl = tab.url.replace('view-source:', '');
       
       var currentServlet = luminateEdit.getCurrentServlet();
-      if(currentServlet != null && luminateEdit.servlets[currentServlet] && luminateEdit.servlets[currentServlet].getUrl() != null) {
+      if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
+         luminateEdit.servlets[currentServlet].getUrl() != null) {
         chrome.pageAction.show(tabId);
       }
     }
@@ -1078,8 +1232,14 @@ luminateEdit.chrome = {
       
       var currentServlet = luminateEdit.getCurrentServlet();
       if(luminateEdit.tabUrl != null && currentServlet != null) {
+        var adminBaseUrl = luminateEdit.tabUrl.split('/site/')[0];
+        /* if this is an Image Library image, split on the images directory */
+        if(luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') != -1) {
+          adminBaseUrl = luminateEdit.tabUrl.split('/images/')[0];
+        }
+        
         chrome.tabs.create({
-          url: luminateEdit.tabUrl.split('/site/')[0] + '/site/' + luminateEdit.servlets[currentServlet].getUrl()
+          url: adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl()
         });
       }
     });

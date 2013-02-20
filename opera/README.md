@@ -13,4 +13,5 @@ compiled in [index.html](https://github.com/noahcooper/luminateEdit/blob/master/
 Download
 --------
 
-The extension can be downloaded and installed here, at [https://github.com/noahcooper/luminateEdit/blob/master/opera/luminateEdit_opera.oex?raw=true](https://github.com/noahcooper/luminateEdit/blob/master/opera/luminateEdit_opera.oex?raw=true).
+The extension can be downloaded from the Opera add-ons site at 
+[https://addons.opera.com/en/extensions/details/luminate-online-page-editor/](https://addons.opera.com/en/extensions/details/luminate-online-page-editor/).
