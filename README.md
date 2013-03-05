@@ -17,6 +17,11 @@ The extension is available for the following browsers:
 Changelog
 ---------
 
+**Version: 1.7 (05-MAR-2013)**
+
+* Fixed [a bug](https://github.com/noahcooper/luminateEdit/issues/1) with the Action Alert Take Action Page 
+edit link.
+
 **Version: 1.6 (19-FEB-2013)**
 
 * Added support for editing images in the Image Library.
@@ -25,7 +30,7 @@ Changelog
 
 **Version: 1.5 (08-FEB-2013)**
 
-* Now available for Opera!
+* Now available for [Opera](https://github.com/noahcooper/luminateEdit/tree/master/opera)!
 * Added support for editing Clubs and Directory pages.
 * Fixed issue with getQueryParam method being broken when JavaScript was minified with UglifyJS.
 * Fixed an issue with Chrome URLs beginning with "view-source:".
@@ -37,12 +42,12 @@ Changelog
 
 **Version: 1.3 (04-JAN-2013)**
 
-* Now available for Safari!
+* Now available for [Safari](https://github.com/noahcooper/luminateEdit/tree/master/safari)!
 * Minor bug fix for the eCommerce confirmation page.
 
 **Version: 1.2 (17-DEC-2012)**
 
-* Now available for Firefox!
+* Now available for [Firefox](https://github.com/noahcooper/luminateEdit/tree/master/firefox)!
 * Added support for editing open authentication settings when viewing the GigyaLogin page.
 * Added support for editing Photo Albums.
 
@@ -53,4 +58,4 @@ Changelog
 
 **Version: 1.0 (13-NOV-2012)**
 
-* Initial release, limited to Chrome only.
+* Initial release, limited to [Chrome](https://github.com/noahcooper/luminateEdit/tree/master/chrome) only.

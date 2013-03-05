@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.6 (19-FEB-2013)
+ * Version: 1.7 (05-MAR-2013)
  */
 
 /* namespace for the extension */
@@ -75,8 +75,9 @@ var luminateEdit = {
           currentAlertId = luminateEdit.getQueryParam('alertId');
         }
         
-        var buildAdminUrl = function(advocacyPageType, additionalArgs) {
-          return '?advocacy=alertPageConfigPage.edit_alert_config_pages&advocacyPageType=' + advocacyPageType + 
+        var buildAdminUrl = function(advocacyPageType, additionalArgs, advocacyParam) {
+          advocacyParam = advocacyParam || 'alertPageConfigPage.edit_alert_config_pages';
+          return '?advocacy=' + advocacyParam + '&advocacyPageType=' + advocacyPageType + 
                  '&alert_id=${alertId}' + ((additionalArgs) ? additionalArgs : '');
         };
         
@@ -90,7 +91,8 @@ var luminateEdit = {
             }
             else {
               /* Action Alerts */
-              adminUrl += buildAdminUrl('takeActionBeanPage', '&isBeanPage=true');
+              adminUrl += buildAdminUrl('takeActionBeanPage', '&isBeanPage=true', 
+                                        'alertBeanPageEditor.edit_alert_config_pages');
             }
             break;
           
