@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.7 (05-MAR-2013)
+ * Version: 1.8 (29-MAR-2013)
  */
 
 /* namespace for the extension */
@@ -665,6 +665,30 @@ var luminateEdit = {
         }
         
         adminUrl = adminUrl.replace('${albumId}', currentAlbumID).replace('${photoId}', currentPhotoID);
+        
+        return adminUrl;
+      }
+    }, 
+    ReceiptRequest: {
+      getUrl: function() {
+        var adminUrl = 'ReceiptAdmin';
+        
+        return adminUrl;
+      }
+    }, 
+    Rewards: {
+      getUrl: function() {
+        var adminUrl = 'RewardsAdmin', 
+        
+        currentPg = luminateEdit.getQueryParam('pg');
+        
+        switch(currentPg) {
+          case 'rdlstcust':
+            adminUrl += '?pg=rdlstcust';
+            break;
+          default:
+            adminUrl += '?pg=rdlsta';
+        }
         
         return adminUrl;
       }

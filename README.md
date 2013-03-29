@@ -17,6 +17,12 @@ The extension is available for the following browsers:
 Changelog
 ---------
 
+**Version: 1.8 (29-MAR-2013)**
+
+* Added support for editing Rewards pages.
+* Added link to Receipt Manager when viewing ReceiptRequest pages.
+* Updated Firefox extension to use Add-on SDK 1.14 to ensure Firefox 20 compatibility.
+
 **Version: 1.7 (05-MAR-2013)**
 
 * Fixed [a bug](https://github.com/noahcooper/luminateEdit/issues/1) with the Action Alert Take Action Page 
