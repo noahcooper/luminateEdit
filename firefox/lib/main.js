@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.8 (29-MAR-2013)
+ * Version: 1.8a (30-MAR-2013)
  */
 
 /* namespace for the extension */
