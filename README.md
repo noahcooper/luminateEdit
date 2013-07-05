@@ -17,6 +17,10 @@ The extension is available for the following browsers:
 Changelog
 ---------
 
+**Version: 1.9 (05-JUL-2013)**
+
+* Fixed a bug caused by a change in the Luminate Online URL syntax following a move from JServ to Tomcat.
+
 **Version: 1.8 (29-MAR-2013)**
 
 * Added support for editing Rewards pages.

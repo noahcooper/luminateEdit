@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.8a (30-MAR-2013)
+ * Version: 1.9 (05-JUL-2013)
  */
 
 /* namespace for the extension */
@@ -22,7 +22,7 @@ var luminateEdit = {
         return 'ImageLibraryPseudoServlet';
       }
       else {
-        return luminateEdit.tabUrl.split('/site/')[1].split('/')[0].split('?')[0];
+        return luminateEdit.tabUrl.split('/site/')[1].split('/')[0].split('?')[0].split(';')[0];
       }
     }
   }, 
