@@ -1281,7 +1281,7 @@ var luminateEdit = {
 /*
  * Luminate Online Page Editor - Opera Next
  * luminateEdit-operaNext.js
- * Version: 1.0 (08-JUL-2013)
+ * Version: 1.0 (24-JUL-2013)
  */
 
 luminateEdit.operaNext = {
