@@ -6,7 +6,7 @@ displayed when viewing a Luminate Online page.
 
 ![screenshot](https://raw.github.com/noahcooper/luminateEdit/master/opera-next/screenshot.png "Opera Next Screenshot")
 
-The Opera extension includes 
+The Opera Next extension includes 
 [luminateEdit.js](https://github.com/noahcooper/luminateEdit/blob/master/shared/src/luminateEdit.js) and 
 [luminateEdit-operaNext.js](https://github.com/noahcooper/luminateEdit/blob/master/opera-next/src/luminateEdit-operaNext.js), 
 compiled in [background.js](https://github.com/noahcooper/luminateEdit/blob/master/opera-next/src/background.js).
