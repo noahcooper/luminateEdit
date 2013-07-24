@@ -2,7 +2,7 @@ Luminate Online Page Editor
 ===========================
 
 The Luminate Online Page Editor is a browser extension that makes it easier to edit pages on your organization's 
-[Luminate Online](http://www.convio.com/our-products/luminate/fundraising.html) website. 
+[Luminate Online](https://www.blackbaud.com/online-marketing/luminate-online) website. 
 
 When viewing a Luminate Online page, a pencil icon will appear in your browser. Clicking on this icon will open a 
 new tab and take you directly to the administrative interface for the page you were viewing.
@@ -12,10 +12,19 @@ The extension is available for the following browsers:
 [Chrome](https://github.com/noahcooper/luminateEdit/tree/master/chrome)  
 [Firefox](https://github.com/noahcooper/luminateEdit/tree/master/firefox)  
 [Safari](https://github.com/noahcooper/luminateEdit/tree/master/safari)  
-[Opera](https://github.com/noahcooper/luminateEdit/tree/master/opera)
+[Opera](https://github.com/noahcooper/luminateEdit/tree/master/opera) / 
+[Opera Next](https://github.com/noahcooper/luminateEdit/tree/master/opera-next)
 
 Changelog
 ---------
+
+**Version: 1.10 (24-JUL-2013)**
+
+* Now available for [Opera Next](https://github.com/noahcooper/luminateEdit/tree/master/opera-next)!
+* Added support for editing Progress Meters.
+* Added link to Receipt Manager when viewing ReceiptViewer pages.
+* Added support for editing secure TeamRaiser pages.
+* Added support for editing custom TellAFriend pages created for PageBuilder pages, StoryBuilder articles, and Events.
 
 **Version: 1.9 (05-JUL-2013)**
 

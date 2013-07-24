@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Luminate Online Page Editor</title>
-<script>
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
@@ -1284,32 +1279,35 @@ var luminateEdit = {
 };
 
 /*
- * Luminate Online Page Editor - Safari
- * luminateEdit-safari.js
- * Version: 1.2 (19-FEB-2013)
+ * Luminate Online Page Editor - Opera Next
+ * luminateEdit-operaNext.js
+ * Version: 1.0 (08-JUL-2013)
  */
 
-luminateEdit.safari = {
+luminateEdit.operaNext = {
   /* checks the current URL for known front-end servlet names, as defined in luminateEdit.servlets */
-  checkForLuminateOnlineUrl: function(event) {
-    /* set the tabUrl and show the button */
-    if(event.target.browserWindow.activeTab.url) {
-      luminateEdit.tabUrl = event.target.browserWindow.activeTab.url;
-    }
-    
-    var currentServlet = luminateEdit.getCurrentServlet();
-    if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
-       luminateEdit.servlets[currentServlet].getUrl() != null) {
-      event.target.disabled = false;
-    }
-    else {
-      event.target.disabled = true;
+  checkForLuminateOnlineUrl: function(tabId, changeInfo, tab) {
+    /* set the tabUrl and show the button as soon as the tab starts loading */
+    if(changeInfo.status == 'loading') {
+      luminateEdit.tabUrl = tab.url.replace('view-source:', '');
+      
+      var currentServlet = luminateEdit.getCurrentServlet();
+      if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
+         luminateEdit.servlets[currentServlet].getUrl() != null) {
+        chrome.pageAction.show(tabId);
+      }
     }
   }, 
   
   /* go to the admin URL when the edit icon is clicked */
-  goToEditUrl: function(event) {
-    if(event.command == 'editPageContent') {
+  goToEditUrl: function() {
+    /* update the tab URL to ensure it is up-to-date at the time the icon is clicked */
+    chrome.tabs.query({
+      active: true, 
+      windowId: chrome.windows.WINDOW_ID_CURRENT
+    }, function(allTabs) {
+      luminateEdit.tabUrl = allTabs[0].url.replace('view-source:', '');
+      
       var currentServlet = luminateEdit.getCurrentServlet();
       if(luminateEdit.tabUrl != null && currentServlet != null) {
         var adminBaseUrl = luminateEdit.tabUrl.split('/site/')[0];
@@ -1318,17 +1316,14 @@ luminateEdit.safari = {
           adminBaseUrl = luminateEdit.tabUrl.split('/images/')[0];
         }
         
-        event.target.browserWindow.openTab().url = adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl();
+        chrome.tabs.create({
+          url: adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl()
+        });
       }
-    }
+    });
   }
 };
 
 /* bind listeners */
-safari.application.addEventListener('validate', luminateEdit.safari.checkForLuminateOnlineUrl, true);
-safari.application.addEventListener('command', luminateEdit.safari.goToEditUrl, true);
-</script>
-</head>
-<body>
-</body>
-</html>
+chrome.tabs.onUpdated.addListener(luminateEdit.operaNext.checkForLuminateOnlineUrl);
+chrome.pageAction.onClicked.addListener(luminateEdit.operaNext.goToEditUrl);

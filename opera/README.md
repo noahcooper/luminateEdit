@@ -1,6 +1,8 @@
 Luminate Online Page Editor - Opera
 ===================================
 
+**[A new version of the extension is available for Opera 15 and later (a.k.a. Opera Next).](https://github.com/noahcooper/luminateEdit/tree/master/opera-next)**
+
 In Opera, the Luminate Online Page Editor extension adds a pencil icon to the main Opera toolbar. The icon is only displayed when viewing a Luminate Online page.
 
 ![screenshot](https://raw.github.com/noahcooper/luminateEdit/master/opera/screenshot.png "Opera Screenshot")

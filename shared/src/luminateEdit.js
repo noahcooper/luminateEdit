@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.9 (05-JUL-2013)
+ * Version: 1.10 (24-JUL-2013)
  */
 
 /* namespace for the extension */
@@ -345,6 +345,23 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
+    DynImg: {
+      getUrl: function() {
+        var adminUrl = 'Social', 
+        
+        currentProgressId = luminateEdit.getQueryParam('pi');
+        
+        if(Number(currentProgressId) <= 23) {
+          /* progress meters 1-23 are the defaults and are not editable */
+          adminUrl += '?social=pi_list';
+        }
+        else {
+          adminUrl += '?social=pi_edit&progress_id=${pi}';
+        }
+        
+        return adminUrl.replace('${pi}', currentProgressId);
+      }
+    }, 
     Ecard: {
       getUrl: function() {
         var adminUrl = 'CommCenter', 
@@ -664,7 +681,8 @@ var luminateEdit = {
             break;
         }
         
-        adminUrl = adminUrl.replace('${albumId}', currentAlbumID).replace('${photoId}', currentPhotoID);
+        adminUrl = adminUrl.replace('${albumId}', currentAlbumID)
+                           .replace('${photoId}', currentPhotoID);
         
         return adminUrl;
       }
@@ -674,6 +692,11 @@ var luminateEdit = {
         var adminUrl = 'ReceiptAdmin';
         
         return adminUrl;
+      }
+    }, 
+    ReceiptViewer: {
+      getUrl: function() {
+        return luminateEdit.servlets.ReceiptRequest.getUrl();
       }
     }, 
     Rewards: {
@@ -787,6 +810,11 @@ var luminateEdit = {
         return luminateEdit.servlets.Survey.getUrl();
       }
     }, 
+    STR: {
+      getUrl: function() {
+        return luminateEdit.servlets.TR.getUrl();
+      }
+    }, 
     Survey: {
       getUrl: function() {
         var adminUrl = 'SurveyAdmin', 
@@ -805,9 +833,33 @@ var luminateEdit = {
         return adminUrl;
       }
     }, 
-    TeamRaiserUser: {
+    TellAFriend: {
       getUrl: function() {
-        /* TODO */
+        var adminUrl = null, 
+        
+        currentType = luminateEdit.getQueryParam('type'), 
+        currentId = luminateEdit.getQueryParam('id');
+        
+        switch(currentType) {
+          case '2':
+            /* Events */
+            adminUrl = 'OrgEventEdit?taf_id=&event_id=${id}&action=action_configure_taf&orgevent.edit=customize_taf&taf_list_key_editable=';
+            break;
+          case '95':
+            /* News2 */
+            adminUrl = 'News2Admin?page=TellAFriend&id=${id}';
+            break;
+          case '1019':
+            /* PageBuilder */
+            adminUrl = 'PageBuilderAdmin?page_id=${id}&pagebuilder=taf_create&version_id=';
+            break;
+        }
+        
+        if(adminUrl != null) {
+          adminUrl = adminUrl.replace('${id}', currentId);
+        }
+        
+        return adminUrl;
       }
     }, 
     Ticketing: {
