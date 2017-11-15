@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.10 (24-JUL-2013)
+ * Version: 1.12 (15-NOV-2017)
  */
 
 /* namespace for the extension */
@@ -938,8 +938,32 @@ var luminateEdit = {
           /* national team page */
           case 'national_company':
             adminUrl += '?exit_process=&page_type=fr_national_company_page' + 
-                        '&tr=national_company_specific_page_edit&action=edit_national_company_page' + 
-                        '&exit_url=&company_id=' + luminateEdit.getQueryParam('company_id');
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team top events page */
+          case 'natl_co_events':
+            adminUrl += '?exit_process=&page_type=fr_national_top_events' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team top teams page */
+          case 'natl_co_teams':
+            adminUrl += '?exit_process=&page_type=fr_national_top_teams' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team top participants page */
+          case 'pg=natl_co_parts':
+            adminUrl += '?exit_process=&page_type=fr_national_top_parts' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team search page */
+          case 'natl_co_srch':
+            adminUrl += '?exit_process=&page_type=fr_national_event_search' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
             break;
           /* ecommerce entry page */
           case 'fr_ecommerce':
@@ -961,7 +985,7 @@ var luminateEdit = {
             adminUrl = 'TRTributes';
             adminUrl += buildPersonalFundraisingUrl('fr_tribute_search');
             break;
-          
+          /* fund page */
           case 'fund':
             adminUrl = 'TRTributes?champion_editable_page=true&page_type=fr_tribute_fund' + 
                        '&action=edit_fund_page_content&tr.tributes=fund_page_edit.Honorary' + 
@@ -1281,7 +1305,7 @@ var luminateEdit = {
 /*
  * Luminate Online Page Editor - Opera Next
  * luminateEdit-operaNext.js
- * Version: 1.0 (24-JUL-2013)
+ * Version: 1.12 (15-NOV-2017)
  */
 
 luminateEdit.operaNext = {

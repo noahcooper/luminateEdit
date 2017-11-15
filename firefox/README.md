@@ -1,14 +1,15 @@
-Luminate Online Page Editor - Firefox
-=====================================
+Luminate Online Page Editor - Chrome
+====================================
 
-In Firefox, the Luminate Online Page Editor add-on adds a pencil icon to the add-on bar. The icon is only displayed when viewing a Luminate Online page.
+In Firefox, the Luminate Online Page Editor extension adds a pencil icon to the address bar. The icon is only 
+displayed when viewing a Luminate Online page.
 
 ![screenshot](https://raw.github.com/noahcooper/luminateEdit/master/firefox/screenshot.png "Firefox Screenshot")
 
-The Firefox add-on includes 
+The Chrome extension includes 
 [luminateEdit.js](https://github.com/noahcooper/luminateEdit/blob/master/shared/src/luminateEdit.js) and 
-[luminateEdit-firefox.js](https://github.com/noahcooper/luminateEdit/blob/master/firefox/src/luminateEdit-firefox.js), 
-compiled in [lib/main.js](https://github.com/noahcooper/luminateEdit/blob/master/firefox/lib/main.js).
+[luminateEdit-chrome.js](https://github.com/noahcooper/luminateEdit/blob/master/firefox/src/luminateEdit-chrome.js), 
+compiled in [background.js](https://github.com/noahcooper/luminateEdit/blob/master/firefox/src/background.js).
 
 Download
 --------

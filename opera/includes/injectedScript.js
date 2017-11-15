@@ -1,1 +1,0 @@
-/* this injected script file must be present to use the onconnect event in index.html */

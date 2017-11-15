@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Luminate Online Page Editor</title>
-<script>
 /*
  * Luminate Online Page Editor
  * luminateEdit.js
- * Version: 1.10 (24-JUL-2013)
+ * Version: 1.12 (15-NOV-2017)
  */
 
 /* namespace for the extension */
@@ -943,8 +938,32 @@ var luminateEdit = {
           /* national team page */
           case 'national_company':
             adminUrl += '?exit_process=&page_type=fr_national_company_page' + 
-                        '&tr=national_company_specific_page_edit&action=edit_national_company_page' + 
-                        '&exit_url=&company_id=' + luminateEdit.getQueryParam('company_id');
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team top events page */
+          case 'natl_co_events':
+            adminUrl += '?exit_process=&page_type=fr_national_top_events' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team top teams page */
+          case 'natl_co_teams':
+            adminUrl += '?exit_process=&page_type=fr_national_top_teams' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team top participants page */
+          case 'pg=natl_co_parts':
+            adminUrl += '?exit_process=&page_type=fr_national_top_parts' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
+            break;
+          /* national team search page */
+          case 'natl_co_srch':
+            adminUrl += '?exit_process=&page_type=fr_national_event_search' + 
+                        '&tr=edit_national_company_page_edit&action=edit_national_company_page' + 
+                        '&company_id=' + luminateEdit.getQueryParam('company_id');
             break;
           /* ecommerce entry page */
           case 'fr_ecommerce':
@@ -966,7 +985,7 @@ var luminateEdit = {
             adminUrl = 'TRTributes';
             adminUrl += buildPersonalFundraisingUrl('fr_tribute_search');
             break;
-          
+          /* fund page */
           case 'fund':
             adminUrl = 'TRTributes?champion_editable_page=true&page_type=fr_tribute_fund' + 
                        '&action=edit_fund_page_content&tr.tributes=fund_page_edit.Honorary' + 
@@ -1284,61 +1303,51 @@ var luminateEdit = {
 };
 
 /*
- * Luminate Online Page Editor - Opera
- * luminateEdit-opera.js
- * Version: 1.1 (19-FEB-2013)
+ * Luminate Online Page Editor - Chrome
+ * luminateEdit-chrome.js
+ * Version: 1.12 (15-NOV-2017)
  */
 
-luminateEdit.opera = {
-  /* store reference to the toolbar button */
-  editButton: null, 
-  
+luminateEdit.chrome = {
   /* checks the current URL for known front-end servlet names, as defined in luminateEdit.servlets */
-  checkForLuminateOnlineUrl: function() {
-    /* set the tabUrl and show the button */
-    if(opera.extension.tabs.getFocused()) {
-      luminateEdit.tabUrl = opera.extension.tabs.getFocused().url;
-    }
-    
-    if(luminateEdit.opera.editButton != null) {
-      opera.contexts.toolbar.removeItem(luminateEdit.opera.editButton);
-      luminateEdit.opera.editButton = null;
-    }
-    
-    var currentServlet = luminateEdit.getCurrentServlet();
-    if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
-       luminateEdit.servlets[currentServlet].getUrl() != null) {
-      luminateEdit.opera.editButton = opera.contexts.toolbar.createItem({
-        title: 'Luminate Online Page Editor', 
-        icon: 'icons/logo18.png', 
-        onclick: luminateEdit.opera.goToEditUrl
-      });
-      opera.contexts.toolbar.addItem(luminateEdit.opera.editButton);
+  checkForLuminateOnlineUrl: function(tabId, changeInfo, tab) {
+    /* set the tabUrl and show the button as soon as the tab starts loading */
+    if(changeInfo.status == 'loading') {
+      luminateEdit.tabUrl = tab.url.replace('view-source:', '');
+      
+      var currentServlet = luminateEdit.getCurrentServlet();
+      if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
+         luminateEdit.servlets[currentServlet].getUrl() != null) {
+        chrome.pageAction.show(tabId);
+      }
     }
   }, 
   
   /* go to the admin URL when the edit icon is clicked */
   goToEditUrl: function() {
-    var currentServlet = luminateEdit.getCurrentServlet();
-    if(luminateEdit.tabUrl != null && currentServlet != null) {
-      var adminBaseUrl = luminateEdit.tabUrl.split('/site/')[0];
-      /* if this is an Image Library image, split on the images directory */
-      if(luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') != -1) {
-        adminBaseUrl = luminateEdit.tabUrl.split('/images/')[0];
-      }
+    /* update the tab URL to ensure it is up-to-date at the time the icon is clicked */
+    chrome.tabs.query({
+      active: true, 
+      windowId: chrome.windows.WINDOW_ID_CURRENT
+    }, function(allTabs) {
+      luminateEdit.tabUrl = allTabs[0].url.replace('view-source:', '');
       
-      opera.extension.tabs.create({
-        url: adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl()
-      });
-    }
+      var currentServlet = luminateEdit.getCurrentServlet();
+      if(luminateEdit.tabUrl != null && currentServlet != null) {
+        var adminBaseUrl = luminateEdit.tabUrl.split('/site/')[0];
+        /* if this is an Image Library image, split on the images directory */
+        if(luminateEdit.tabUrl.indexOf('/images/content/pagebuilder/') != -1) {
+          adminBaseUrl = luminateEdit.tabUrl.split('/images/')[0];
+        }
+        
+        chrome.tabs.create({
+          url: adminBaseUrl + '/site/' + luminateEdit.servlets[currentServlet].getUrl()
+        });
+      }
+    });
   }
 };
 
 /* bind listeners */
-opera.extension.tabs.addEventListener('focus', luminateEdit.opera.checkForLuminateOnlineUrl, false);
-opera.extension.onconnect = luminateEdit.opera.checkForLuminateOnlineUrl;
-</script>
-</head>
-<body>
-</body>
-</html>
+chrome.tabs.onUpdated.addListener(luminateEdit.chrome.checkForLuminateOnlineUrl);
+chrome.pageAction.onClicked.addListener(luminateEdit.chrome.goToEditUrl);

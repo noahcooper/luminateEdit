@@ -1,16 +1,15 @@
-Luminate Online Page Editor - Opera
-===================================
+Luminate Online Page Editor - Opera Next
+========================================
 
-**[A new version of the extension is available for Opera 15 and later (a.k.a. Opera Next).](https://github.com/noahcooper/luminateEdit/tree/master/opera-next)**
-
-In Opera, the Luminate Online Page Editor extension adds a pencil icon to the main Opera toolbar. The icon is only displayed when viewing a Luminate Online page.
+In Opera, the Luminate Online Page Editor extension adds a pencil icon to the address bar. The icon is only 
+displayed when viewing a Luminate Online page.
 
 ![screenshot](https://raw.github.com/noahcooper/luminateEdit/master/opera/screenshot.png "Opera Screenshot")
 
-The Opera extension includes 
+The Opera Next extension includes 
 [luminateEdit.js](https://github.com/noahcooper/luminateEdit/blob/master/shared/src/luminateEdit.js) and 
-[luminateEdit-opera.js](https://github.com/noahcooper/luminateEdit/blob/master/opera/src/luminateEdit-opera.js), 
-compiled in [index.html](https://github.com/noahcooper/luminateEdit/blob/master/opera/src/index.html).
+[luminateEdit-operaNext.js](https://github.com/noahcooper/luminateEdit/blob/master/opera/src/luminateEdit-operaNext.js), 
+compiled in [background.js](https://github.com/noahcooper/luminateEdit/blob/master/opera/src/background.js).
 
 Download
 --------

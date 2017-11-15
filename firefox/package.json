@@ -1,5 +1,0 @@
-{
-  "description": "This extension makes it easier to edit pages on your organization's Luminate Online website.\n\nWhen viewing a Luminate Online page, a pencil icon will appear in your browser's add-on bar. Clicking on this icon will open a new tab and take you directly to the administrative interface for the page you were viewing.", 
-  "icon64": "data/logo128.png", 
-  "icon": "data/logo128.png"
-}

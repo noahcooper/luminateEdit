@@ -1,10 +1,10 @@
 /*
- * Luminate Online Page Editor - Opera Next
- * luminateEdit-operaNext.js
- * Version: 1.0 (24-JUL-2013)
+ * Luminate Online Page Editor - Chrome
+ * luminateEdit-chrome.js
+ * Version: 1.12 (15-NOV-2017)
  */
 
-luminateEdit.operaNext = {
+luminateEdit.chrome = {
   /* checks the current URL for known front-end servlet names, as defined in luminateEdit.servlets */
   checkForLuminateOnlineUrl: function(tabId, changeInfo, tab) {
     /* set the tabUrl and show the button as soon as the tab starts loading */
@@ -12,8 +12,7 @@ luminateEdit.operaNext = {
       luminateEdit.tabUrl = tab.url.replace('view-source:', '');
       
       var currentServlet = luminateEdit.getCurrentServlet();
-      if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
-         luminateEdit.servlets[currentServlet].getUrl() != null) {
+      if(currentServlet != null && luminateEdit.servlets[currentServlet] && luminateEdit.servlets[currentServlet].getUrl() != null) {
         chrome.pageAction.show(tabId);
       }
     }
@@ -45,5 +44,5 @@ luminateEdit.operaNext = {
 };
 
 /* bind listeners */
-chrome.tabs.onUpdated.addListener(luminateEdit.operaNext.checkForLuminateOnlineUrl);
-chrome.pageAction.onClicked.addListener(luminateEdit.operaNext.goToEditUrl);
+chrome.tabs.onUpdated.addListener(luminateEdit.chrome.checkForLuminateOnlineUrl);
+chrome.pageAction.onClicked.addListener(luminateEdit.chrome.goToEditUrl);

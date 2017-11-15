@@ -12,15 +12,25 @@ The extension is available for the following browsers:
 [Chrome](https://github.com/noahcooper/luminateEdit/tree/master/chrome)  
 [Firefox](https://github.com/noahcooper/luminateEdit/tree/master/firefox)  
 [Safari](https://github.com/noahcooper/luminateEdit/tree/master/safari)  
-[Opera](https://github.com/noahcooper/luminateEdit/tree/master/opera) / 
-[Opera Next](https://github.com/noahcooper/luminateEdit/tree/master/opera-next)
+[Opera](https://github.com/noahcooper/luminateEdit/tree/master/opera)
 
 Changelog
 ---------
 
+**Version: 1.12 (15-NOV-2017)**
+
+* Minor bug fixes.
+* Updates to support Firefox 53+.
+* Dropped support for legacy versions of Firefox and Opera.
+
+**Version: 1.11 (30-OCT-2015)**
+
+* Added support for editing National Teams Top Events, Top Teams, Top Participants, and Search pages.
+* Updates to support Firefox 38+. 
+
 **Version: 1.10 (24-JUL-2013)**
 
-* Now available for [Opera Next](https://github.com/noahcooper/luminateEdit/tree/master/opera-next)!
+* Now available for [Opera Next](https://github.com/noahcooper/luminateEdit/tree/master/opera)!
 * Added support for editing Progress Meters.
 * Added link to Receipt Manager when viewing ReceiptViewer pages.
 * Added support for editing secure TeamRaiser pages.

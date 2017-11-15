@@ -1,7 +1,7 @@
 /*
  * Luminate Online Page Editor - Safari
  * luminateEdit-safari.js
- * Version: 1.2 (19-FEB-2013)
+ * Version: 1.12 (15-NOV-2017)
  */
 
 luminateEdit.safari = {
@@ -13,8 +13,7 @@ luminateEdit.safari = {
     }
     
     var currentServlet = luminateEdit.getCurrentServlet();
-    if(currentServlet != null && luminateEdit.servlets[currentServlet] && 
-       luminateEdit.servlets[currentServlet].getUrl() != null) {
+    if(currentServlet != null && luminateEdit.servlets[currentServlet] && luminateEdit.servlets[currentServlet].getUrl() != null) {
       event.target.disabled = false;
     }
     else {
